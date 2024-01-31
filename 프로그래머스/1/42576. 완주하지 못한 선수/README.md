@@ -75,3 +75,58 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+## Comment
+
+### #1
+
+리스트를 딕셔너리로 만들 때
+```python
+def make_dict(my_list):
+    my_dict = {}
+    for my_ in my_list:
+        if my_ in my_dict.keys():
+            my_dict[my_] += 1
+        else:
+            my_dict[my_] = 1
+    return my_dict
+```
+
+collections 모듈의 Counter함수를 사용하면 간편하다.
+```python
+from collections import Counter
+
+def make_dict(my_list):
+    return Counter(my_list)
+```
+
+### #2
+
+딕셔너리는 더하거나 빼지 못한다.
+```python
+a = {"a": 1, "b": 2}
+b = {"a": 3, "b": 4}
+a + b
+
+#> unsupported operand type(s) for +: 'dict' and 'dict'
+```
+
+하지만 Counter객체는 더하거나 뺄 수 있다.
+```python
+from collections import Counter
+
+a = Counter(a)
+b = Counter(b)
+a + b
+
+#> Counter({'b': 8, 'a': 6})
+```
+
+이런 기능으로 코드를 다음과 같이 변경할 수 있다.
+```python
+import collections
+
+def solution(participant, completion):
+    answer = collections.Counter(participant) - collections.Counter(completion)
+    return list(answer.keys())[0]
+```
