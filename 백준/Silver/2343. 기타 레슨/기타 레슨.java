@@ -9,15 +9,18 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+		// 전체 강의 수 N, 블루레이 개수 M
 		String[] input = br.readLine().split(" ");
 		int N = Integer.parseInt(input[0]);
 		int M = Integer.parseInt(input[1]);
 
+		// 강의 배열
 		arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
 		int sum = Arrays.stream(arr).sum();
 		int max = Arrays.stream(arr).max().getAsInt();
 
+		// max와 sum 사이에서 블루레이 개수가 M이 되는 값을 이진탐색
 		System.out.println(binarySearch2(M, max, sum));
 	}
 
@@ -25,6 +28,7 @@ public class Main {
 		while (low <= high) {
             int mid = (low + high) / 2;
 
+            // getCount함수로 mid까지 필요한 블루레이 개수를 구함
             int count = getCount(mid);
 
             if(count > key){
