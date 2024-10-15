@@ -1,24 +1,18 @@
 def solution(s):
-#     temp = 0
-#     while s:
-#         s = s.replace('()', '')
-#         if temp == len(s):
-#             break
-#         else:
-#             temp = len(s)
+    stack = []
 
-#     return False if s else True
-    open = 0
     for i in s:
-        if i == '(':
-            open += 1
-        elif i == ')':
-            open -= 1
-        
-        if open < 0:
-            return False
-    else:
-        if open == 0:
-            return True
+        if not stack:
+            stack.append(i)
+            continue
+
+        first = stack.pop()
+        second = i
+
+        if first == "(" and second == ")":
+            pass
         else:
-            return False
+            stack.append(first)
+            stack.append(second)
+        
+    return True if len(stack) == 0 else False
