@@ -1,10 +1,9 @@
-from collections import deque
-
 def solution(arr):
-    rem = None
     answer = []
     for i in arr:
-        if rem != i:
-            rem = i
+        if not answer:
             answer.append(i)
+        elif answer[-1] != i:
+            answer.append(i)
+    
     return answer
